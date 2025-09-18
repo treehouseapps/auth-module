@@ -1,0 +1,8 @@
+src/app/
+node_modules/
+.next/
+next.config.mjs
+postcss.config.mjs
+jsconfig.json
+package-lock.json
+*.log
