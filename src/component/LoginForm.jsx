@@ -9,22 +9,23 @@ export default function Login() {
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false);
 
-    const onSubmit = async (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        const result = await loginUser(email, password, { checkUserExists });
+        const result = loginUser(email, password);
 
         if (result.success) {
-            console.log(`Welcome!`);
+            console.log('Success:', result.data);
         } else {
-            console.log(result.error);
+            console.log('Error:', result.error);
         }
+
     }
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-950">
             <div className="w-full max-w-md p-8 bg-gray-900 rounded-xl shadow-lg">
                 <h1 className="text-3xl font-bold text-white mb-6 text-center">Login</h1>
 
-                <form className="space-y-5" onSubmit={onSubmit}>
+                <form className="space-y-5">
                     <div>
                         <label className="block text-gray-400 mb-1">Username or Email</label>
                         <input

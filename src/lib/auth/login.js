@@ -1,16 +1,14 @@
-export async function loginUser(email, password, { checkUserExists }) {
-    // 1. Basic validation
-    if (!email || !password) {
-        return { success: false, error: 'Email and password are required' };
+export function loginUser(email, password) {
+    const e = (email || '').trim();
+    const p = (password || '').trim();
+
+    if (!e || !p) return { success: false, error: 'Email and password are required' };
+
+
+    const emailPattern = /\S+@\S+\.\S+/;
+    if (!emailPattern.test(email)) {
+        return { success: false, error: 'Invalid email format' };
     }
 
-    // 2. Call consumer-provided DB check
-    const user = await checkUserExists(email, password);
-
-    // 3. Return result
-    if (!user) {
-        return { success: false, error: 'Invalid credentials' };
-    }
-
-    return { success: true, message: 'Login successful', user };
+    return { success: true, data: { email, password } };
 }
