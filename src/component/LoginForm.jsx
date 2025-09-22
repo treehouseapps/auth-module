@@ -11,11 +11,12 @@ export default function Login() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const result = await loginUser(email, password);
+        const result = await loginUser(email, password, { checkUserExists });
+
         if (result.success) {
-            console.log(result.message)
+            console.log(`Welcome!`);
         } else {
-            console.log(result.message)
+            console.log(result.error);
         }
     }
     return (
