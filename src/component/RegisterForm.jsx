@@ -5,11 +5,12 @@ import { useState } from "react";
 
 export default function Register() {
     const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const onSubmit = () => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        const result = registerUser(email, password);
+        const result = registerUser(name, email, password);
 
         if (result.success) {
             console.log('Success:', result.message);
@@ -22,7 +23,7 @@ export default function Register() {
             <div className="w-full max-w-md p-8 bg-gray-900 rounded-xl shadow-lg">
                 <h1 className="text-3xl font-bold text-white mb-6 text-center">Register</h1>
 
-                <form className="space-y-5">
+                <form className="space-y-5" onSubmit={onSubmit}>
                     <div>
                         <label className="block text-gray-400 mb-1">Name</label>
                         <input
@@ -35,6 +36,18 @@ export default function Register() {
                         />
                     </div>
 
+
+                    <div className="relative">
+                        <label className="block text-gray-400 mb-1">Email</label>
+                        <input
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            type="email"
+                            placeholder="Enter your email"
+                            className="w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            required
+                        />
+                    </div>
 
                     <div className="relative">
                         <label className="block text-gray-400 mb-1">Password</label>
@@ -62,7 +75,6 @@ export default function Register() {
 
                     <button
                         type="submit"
-                        onSubmit={onSubmit}
                         className="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition"
                     >
                         Register
