@@ -13,7 +13,7 @@ export default function Register() {
         const result = registerUser(name, email, password);
 
         if (result.success) {
-            console.log('Success:', result.message);
+            console.log('Success:', result.data);
         } else {
             console.log('Error:', result.error);
         }
