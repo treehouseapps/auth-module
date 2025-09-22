@@ -1,5 +1,6 @@
 "use client";
 
+import { registerUser } from "@/lib/auth/register";
 import { useState } from "react";
 
 export default function Register() {
@@ -7,7 +8,14 @@ export default function Register() {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const onSubmit = () => {
-        console.log(name, password);
+        e.preventDefault();
+        const result = registerUser(email, password);
+
+        if (result.success) {
+            console.log('Success:', result.message);
+        } else {
+            console.log('Error:', result.error);
+        }
     }
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-950">
