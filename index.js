@@ -1,11 +1,10 @@
 
-const LoginForm = require('./src/components/LoginForm').default;
-const RegisterForm = require('./src/component/RegisterForm').default;
+import LoginForm from "./src/component/LoginForm";
+import RegisterForm from "./src/component/RegisterForm";
+import { loginUser } from "./src/lib/auth/login";
+import { registerUser } from "./src/lib/auth/register";
 
-const { loginUser } = require('./src/lib/auth/login');
-const { registerUser } = require('./src/lib/auth/register');
-
-module.exports = {
+export {
     LoginForm,
     RegisterForm,
     loginUser,
