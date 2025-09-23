@@ -1,6 +1,6 @@
 "use client";
 
-import { registerUser } from "..lib/auth/register";
+import { registerUser } from "../lib/auth/register";
 
 import { useState } from "react";
 
