@@ -25,7 +25,7 @@ export default function Login() {
             <div className="w-full max-w-md p-8 bg-gray-900 rounded-xl shadow-lg">
                 <h1 className="text-3xl font-bold text-white mb-6 text-center">Login</h1>
 
-                <form className="space-y-5">
+                <form className="space-y-5" onSubmit={onSubmit} >
                     <div>
                         <label className="block text-gray-400 mb-1">Username or Email</label>
                         <input
@@ -65,7 +65,6 @@ export default function Login() {
 
                     <button
                         type="submit"
-                        onSubmit={onSubmit}
                         className="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition"
                     >
                         Login
