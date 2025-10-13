@@ -1,89 +1,94 @@
 "use client";
-import { registerUser } from "../lib/auth/register";
-
 import { useState } from "react";
+import { registerUser } from "../lib/auth/register";
+import "../public/style.css";
+
 
 export default function Register() {
-    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+
     const onSubmit = (e) => {
         e.preventDefault();
-        const result = registerUser(name, email, password);
-
-        if (result.success) {
-            console.log('Success:', result.data);
-        } else {
-            console.log('Error:', result.error);
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
         }
-    }
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-950">
-            <div className="w-full max-w-md p-8 bg-gray-900 rounded-xl shadow-lg">
-                <h1 className="text-3xl font-bold text-white mb-6 text-center">Register</h1>
 
-                <form className="space-y-5" onSubmit={onSubmit}>
-                    <div>
-                        <label className="block text-gray-400 mb-1">Name</label>
+        const result = registerUser(username, email, password);
+        if (result.success) {
+            console.log("Registered:", result.data);
+        } else {
+            console.log("Error:", result.error);
+        }
+    };
+
+    return (
+        <div className="auth-container">
+            <div className="auth-box">
+                <h1 className="auth-title">Create Account</h1>
+
+                <form className="auth-form" onSubmit={onSubmit}>
+                    <div className="form-group">
+                        <label>Username</label>
                         <input
                             type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            placeholder="Enter your name"
-                            className="w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Enter your username"
                             required
                         />
                     </div>
 
-
-                    <div className="relative">
-                        <label className="block text-gray-400 mb-1">Email</label>
+                    <div className="form-group">
+                        <label>Email</label>
                         <input
+                            type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            type="email"
                             placeholder="Enter your email"
-                            className="w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                             required
                         />
                     </div>
 
-                    <div className="relative">
-                        <label className="block text-gray-400 mb-1">Password</label>
+                    <div className="form-group password-group">
+                        <label>Password</label>
                         <input
+                            type={showPassword ? "text" : "password"}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            type={showPassword ? "text" : "password"}
-                            placeholder="Enter your password"
-                            className="w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            placeholder="Enter password"
                             required
                         />
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                            className="toggle-password"
                         >
                             {showPassword ? "Hide" : "Show"}
                         </button>
                     </div>
 
-                    <label className="flex items-center space-x-2 text-gray-400 text-sm">
-                        <input type="checkbox" className="w-4 h-4 text-purple-500 rounded" />
-                        <span>Remember me</span>
-                    </label>
+                    <div className="form-group">
+                        <label>Confirm Password</label>
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            placeholder="Re-enter password"
+                            required
+                        />
+                    </div>
 
-                    <button
-                        type="submit"
-                        className="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition"
-                    >
+                    <button type="submit" className="auth-button">
                         Register
                     </button>
 
-                    <p className="text-center text-gray-400 text-sm mt-2">
-                        <a href="/login" className="text-purple-400 hover:underline">
-                            Already have an account?
-                        </a>
+                    <p className="auth-links">
+                        <a href="/login">Already have an account? Login</a>
                     </p>
                 </form>
             </div>
