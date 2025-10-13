@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { loginUser } from "../lib/auth/login";
 import { registerUser } from "../lib/auth/register";
-import "../styles/auth.css";
+import "../public/style.css";
 
 export default function AuthPortal() {
     const [mode, setMode] = useState("login"); // 'login' | 'register'
