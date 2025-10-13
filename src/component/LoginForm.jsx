@@ -1,17 +1,15 @@
 "use client";
-import { loginUser } from "../lib/auth/login";
 import { useState } from "react";
+import { loginUser } from "../lib/auth/login";
 import "../public/style.css";
 
-export default function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
+export default function LoginForm() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    const onSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const result = loginUser(email, password);
-
         if (result.success) {
             console.log('Success:', result.data);
         } else {
@@ -21,51 +19,44 @@ export default function Login() {
 
     return (
         <div className="auth-container">
-            <div className="auth-box">
-                <h1 className="auth-title">Login</h1>
+            <div className="auth-card">
+                <h2 className="auth-title">Welcome Back</h2>
+                <p className="auth-sub">Please sign in to continue</p>
 
-                <form className="auth-form" onSubmit={onSubmit}>
-                    <div className="form-group">
-                        <label>Username or Email</label>
+                <form onSubmit={handleSubmit} className="auth-form">
+                    <div>
+                        <label>Email</label>
                         <input
-                            type="text"
+                            type="email"
+                            placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your username or email"
                             required
                         />
                     </div>
 
-                    <div className="form-group password-group">
+                    <div>
                         <label>Password</label>
                         <input
-                            type={showPassword ? "text" : "password"}
+                            type="password"
+                            placeholder="Enter your password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter your password"
                             required
                         />
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="toggle-password"
-                        >
-                            {showPassword ? "Hide" : "Show"}
-                        </button>
                     </div>
 
-                    <label className="remember-me">
-                        <input type="checkbox" /> Remember me
-                    </label>
-
-                    <button type="submit" className="auth-button">
+                    <button type="submit" className="auth-btn">
                         Login
                     </button>
-
-                    <p className="auth-links">
-                        <a href="/register">Register</a> | <a href="#">Forgot password?</a>
-                    </p>
                 </form>
+
+                <p className="auth-switch">
+                    Don’t have an account?{" "}
+                    <a href="/register">
+                        <button>Register</button>
+                    </a>
+                </p>
             </div>
         </div>
     );

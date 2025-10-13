@@ -4,8 +4,8 @@ import { loginUser } from "../lib/auth/login";
 import { registerUser } from "../lib/auth/register";
 import "../public/style.css";
 
-export default function AuthPortal() {
-    const [mode, setMode] = useState("login"); // 'login' | 'register'
+export default function AuthForm() {
+    const [mode, setMode] = useState("login");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");

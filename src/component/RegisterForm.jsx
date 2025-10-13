@@ -3,22 +3,14 @@ import { useState } from "react";
 import { registerUser } from "../lib/auth/register";
 import "../public/style.css";
 
+export default function RegisterForm() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-export default function Register() {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-
-    const onSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        if (password !== confirmPassword) {
-            alert("Passwords do not match!");
-            return;
-        }
-
-        const result = registerUser(username, email, password);
+        const result = registerUser(name, email, password);
         if (result.success) {
             console.log("Registered:", result.data);
         } else {
@@ -28,69 +20,55 @@ export default function Register() {
 
     return (
         <div className="auth-container">
-            <div className="auth-box">
-                <h1 className="auth-title">Create Account</h1>
+            <div className="auth-card">
+                <h2 className="auth-title">Create Account</h2>
+                <p className="auth-sub">Fill the form to register</p>
 
-                <form className="auth-form" onSubmit={onSubmit}>
-                    <div className="form-group">
-                        <label>Username</label>
+                <form onSubmit={handleSubmit} className="auth-form">
+                    <div>
+                        <label>Name</label>
                         <input
                             type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            placeholder="Enter your username"
+                            placeholder="Enter your name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             required
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div>
                         <label>Email</label>
                         <input
                             type="email"
+                            placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your email"
                             required
                         />
                     </div>
 
-                    <div className="form-group password-group">
+                    <div>
                         <label>Password</label>
                         <input
-                            type={showPassword ? "text" : "password"}
+                            type="password"
+                            placeholder="Enter your password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter password"
-                            required
-                        />
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="toggle-password"
-                        >
-                            {showPassword ? "Hide" : "Show"}
-                        </button>
-                    </div>
-
-                    <div className="form-group">
-                        <label>Confirm Password</label>
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            placeholder="Re-enter password"
                             required
                         />
                     </div>
 
-                    <button type="submit" className="auth-button">
+                    <button type="submit" className="auth-btn">
                         Register
                     </button>
-
-                    <p className="auth-links">
-                        <a href="/login">Already have an account? Login</a>
-                    </p>
                 </form>
+
+                <p className="auth-switch">
+                    Already have an account?{" "}
+                    <a href="/login">
+                        <button>Login</button>
+                    </a>
+                </p>
             </div>
         </div>
     );
