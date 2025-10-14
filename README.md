@@ -1,5 +1,3 @@
-# README.md
-
 # Auth Module: Login & Register Forms
 
 Reusable React authentication module supporting **separate forms** and a **combined AuthForm** component.
@@ -44,14 +42,14 @@ import { LoginForm, RegisterForm } from 'treehouse-login';
 
 // Login Page
 <LoginForm onSubmit={(res) => {
-  if(res.success) alert("Login: " + res.data.email);
-  else alert("Error: " + res.error);
+  if(res.success) console.log("Login success:", res.data);
+  else console.log("Login error:", res.error);
 }} />
 
 // Register Page
 <RegisterForm onSubmit={(res) => {
-  if(res.success) alert("Registered: " + res.data.email);
-  else alert("Error: " + res.error);
+  if(res.success) console.log("Registration success:", res.data);
+  else console.log("Registration error:", res.error);
 }} />
 ```
 
@@ -61,8 +59,8 @@ import { LoginForm, RegisterForm } from 'treehouse-login';
 import { AuthForm } from 'treehouse-login';
 
 <AuthForm onResult={(res) => {
-  if(res.success) alert("Success: " + JSON.stringify(res.data));
-  else alert("Error: " + res.error);
+  if(res.success) console.log("Success:", res.data);
+  else console.log("Error:", res.error);
 }} />
 ```
 
