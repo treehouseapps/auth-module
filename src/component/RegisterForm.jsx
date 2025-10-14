@@ -3,7 +3,7 @@ import { useState } from "react";
 import { registerUser } from "../lib/auth/register";
 import "../public/style.css";
 
-export default function RegisterForm() {
+export default function RegisterForm({ onSubmit }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -11,11 +11,7 @@ export default function RegisterForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const result = registerUser(name, email, password);
-        if (result.success) {
-            console.log("Registered:", result.data);
-        } else {
-            console.log("Error:", result.error);
-        }
+        if (onSubmit) onSubmit(result)
     };
 
     return (
