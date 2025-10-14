@@ -3,7 +3,7 @@ import { useState } from "react";
 import { loginUser } from "../lib/auth/login";
 import "../public/style.css";
 
-export default function LoginForm() {
+export default function LoginForm(data) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -12,6 +12,7 @@ export default function LoginForm() {
         const result = loginUser(email, password);
         if (result.success) {
             console.log('Success:', result.data);
+            data(result)
         } else {
             console.log('Error:', result.error);
         }
