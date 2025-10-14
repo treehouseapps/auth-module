@@ -58,7 +58,7 @@ import { LoginForm, RegisterForm } from 'treehouse-login';
 ```jsx
 import { AuthForm } from 'treehouse-login';
 
-<AuthForm onResult={(res) => {
+<AuthForm onSubmit={(res) => {
   if(res.success) console.log("Success:", res.data);
   else console.log("Error:", res.error);
 }} />
