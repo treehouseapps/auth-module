@@ -10,12 +10,7 @@ export default function LoginForm({ onSubmit }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const result = loginUser(email, password);
-        if (result.success) {
-            console.log('Success:', result.data);
-            if (onSubmit) onSubmit(result)
-        } else {
-            console.log('Error:', result.error);
-        }
+        if (onSubmit) onSubmit(result)
     };
 
     return (

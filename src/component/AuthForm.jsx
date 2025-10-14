@@ -4,7 +4,7 @@ import { loginUser } from "../lib/auth/login";
 import { registerUser } from "../lib/auth/register";
 import "../public/style.css";
 
-export default function AuthForm() {
+export default function AuthForm({ onSubmit }) {
     const [mode, setMode] = useState("login");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -17,7 +17,7 @@ export default function AuthForm() {
                 ? loginUser(email, password)
                 : registerUser(name, email, password);
 
-        console.log(result);
+        if (onSubmit) onSubmit(result)
     };
 
     return (
