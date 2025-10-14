@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Auth Module with Login & Register Forms
 
-## Getting Started
+A reusable authentication module for React apps, supporting both **separate forms** and a **combined AuthPortal**.
 
-First, run the development server:
+This module is flexible:
+
+- Use **separate LoginForm & RegisterForm** on different routes (recommended for apps with App Router).  
+- Use **AuthForm** to combine login & register into one modern component with toggle animations.
+
+---
+
+## Features
+
+- Separate `LoginForm` & `RegisterForm` components
+- Optional combined `AuthForm` component
+- Uses your existing `loginUser` and `registerUser` functions
+- Supports callbacks for handling success/error
+- Pure custom CSS (no Tailwind required)
+- Fully reusable and scalable
+
+---
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Using npm
+npm install treehouse-login
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Using yarn
+yarn add treehouse-login
