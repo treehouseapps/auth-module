@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Auth Module: Login & Register Forms
 
-## Getting Started
+Reusable React authentication module supporting **separate forms** and a **combined AuthForm** component.
 
-First, run the development server:
+---
+
+## 🔹 Approaches
+
+| Approach              | When to Use                     | Components                          |
+| --------------------- | ------------------------------- | ----------------------------------- |
+| **Separate Forms**    | Apps with multiple routes       | `<LoginForm />`, `<RegisterForm />` |
+| **Combined AuthForm** | Single-page or modal-style auth | `<AuthForm />`                      |
+
+---
+
+## Features
+
+* Callback handling for success/error
+* Returns full response: `{ success, data, error }`
+* Input validation included
+* Pure custom CSS, no Tailwind
+* Fully reusable
+
+---
+
+## Installation
 
 ```bash
+npm install treehouse-login
+# or
+yarn add treehouse-login
+```
+
+---
+
+## Usage Examples
+
+### 1️⃣ Separate Forms
+
+```jsx
+import { LoginForm, RegisterForm } from 'treehouse-login';
+
+// Login Page
+<LoginForm onSubmit={(res) => {
+  if(res.success) console.log("Login success:", res.data);
+  else console.log("Login error:", res.error);
+}} />
+
+// Register Page
+<RegisterForm onSubmit={(res) => {
+  if(res.success) console.log("Registration success:", res.data);
+  else console.log("Registration error:", res.error);
+}} />
+```
+
+### 2️⃣ Combined AuthForm
+
+```jsx
+import { AuthForm } from 'treehouse-login';
+
+<AuthForm onSubmit={(res) => {
+  if(res.success) console.log("Success:", res.data);
+  else console.log("Error:", res.error);
+}} />
+```
+
+---
+
+## How It Works
+
+* Module handles input and validation
+* Calls the developer callback with full response `{ success, data, error }`
+* Developer decides UI and post-processing
+
+---
+
+## Commands to Test Locally
+
+```bash
+npx create-next-app my-auth-test
+cd my-auth-test
+
+# Copy components if needed or use package
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Notes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Separate Forms → best for route-based apps
+* AuthForm → best for single-page/modal UX
+* Callback always receives full response for developer handling
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
