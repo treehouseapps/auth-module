@@ -1,18 +1,52 @@
 "use client";
+import emailjs from "emailjs-com";
 import { useState } from "react";
 import { registerUser } from "../lib/auth/register";
 import "../public/style.css";
+import OtpForm from "./verifyOTP";
 
 export default function RegisterForm({ onSubmit }) {
+    const [step, setStep] = useState("register");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const result = registerUser(name, email, password);
-        if (onSubmit) onSubmit(result)
+        const result = await registerUser(name, email, password);
+
+        if (result?.success) {
+            setStep("otp");
+
+            const now = new Date();
+            const futureTime = new Date(now.getTime() + 5 * 60 * 1000);
+
+            emailjs
+                .send(
+                    "service_hwxf2z8",
+                    "template_ih0ilv9",
+                    {
+                        email: email,
+                        passcode: result.data.otp,
+                        time: futureTime.toLocaleString(),
+                    },
+                    "27Rl0xvyqXbmc5Tnv"
+                )
+                .then(
+                    () => alert("✅ OTP sent successfully!"),
+                    (error) => {
+                        console.error("EmailJS error:", error);
+                        alert("❌ Failed to send OTP. Check console.");
+                    }
+                );
+        }
+
+        if (onSubmit) onSubmit(result);
     };
+
+    if (step === "otp") {
+        return <OtpForm email={email} onSubmit={(res) => console.log(res)} />;
+    }
 
     return (
         <div className="auth-container">

@@ -1,4 +1,4 @@
-export function registerUser(name, email, password) {
+export async function registerUser(name, email, password) {
 
     if (!name || !email || !password) {
         return { success: false, error: 'Name, email, and password are required' };
@@ -13,5 +13,13 @@ export function registerUser(name, email, password) {
         return { success: false, error: 'Password must be at least 4 characters' };
     }
 
-    return { success: true, data: { name, email, password } };
+    const res = await fetch("http://localhost:4000/send-otp", {
+        method: 'post',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+    })
+
+    const data = await res.json();
+
+    return { success: true, data };
 }

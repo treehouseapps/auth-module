@@ -18,6 +18,7 @@ export default function AuthForm({ onSubmit }) {
                 : registerUser(name, email, password);
 
         if (onSubmit) onSubmit(result)
+        console.log(result)
     };
 
     return (
@@ -77,12 +78,12 @@ export default function AuthForm({ onSubmit }) {
                     {mode === "login" ? (
                         <>
                             Don’t have an account?{" "}
-                            <button onClick={() => setMode("register")}>Register</button>
+                            <button type="button" onClick={() => setMode("register")}>Register</button>
                         </>
                     ) : (
                         <>
                             Already have an account?{" "}
-                            <button onClick={() => setMode("login")}>Login</button>
+                            <button type="button" onClick={() => setMode("login")}>Login</button>
                         </>
                     )}
                 </p>
