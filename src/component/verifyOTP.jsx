@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-// import { verifyOtp } from "../lib/auth/verifyOtp";
+import { verifyOtp } from "../lib/auth/verifyOtp";
 import "../public/style.css";
 
 export default function OtpForm({ email, onSubmit }) {
@@ -12,17 +12,16 @@ export default function OtpForm({ email, onSubmit }) {
         e.preventDefault();
         setLoading(true);
         setError("");
-
-        // try {
-        //     const result = await verifyOtp(email, otp); // call your API
-        //     if (onSubmit) onSubmit(result);
-        //     console.log("OTP verification result:", result);
-        // } catch (err) {
-        //     console.log(err)
-        //     setError(err.message || "OTP verification failed");
-        // } finally {
-        //     setLoading(false);
-        // }
+        try {
+            const result = await verifyOtp(email, otp);
+            setLoading(false)
+            if (onSubmit) onSubmit(result);
+        } catch (err) {
+            console.log(err)
+            setError(err.message || "OTP verification failed");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (

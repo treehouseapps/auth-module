@@ -13,13 +13,13 @@ export async function registerUser(name, email, password) {
         return { success: false, error: 'Password must be at least 4 characters' };
     }
 
-    const res = await fetch("http://localhost:4000/send-otp", {
+    const result = await fetch("http://localhost:4000/send-otp", {
         method: 'post',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
     })
 
-    const data = await res.json();
+    const data = await result.json();
 
     return { success: true, data };
 }

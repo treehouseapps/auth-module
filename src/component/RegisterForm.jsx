@@ -9,15 +9,15 @@ export default function RegisterForm({ onSubmit }) {
     const [step, setStep] = useState("register");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(true)
     const [password, setPassword] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(false)
         const result = await registerUser(name, email, password);
 
         if (result?.success) {
-            setStep("otp");
-
             const now = new Date();
             const futureTime = new Date(now.getTime() + 5 * 60 * 1000);
 
@@ -27,13 +27,16 @@ export default function RegisterForm({ onSubmit }) {
                     "template_ih0ilv9",
                     {
                         email: email,
-                        passcode: result.data.otp,
+                        passcode: result.data.data.otp,
                         time: futureTime.toLocaleString(),
                     },
                     "27Rl0xvyqXbmc5Tnv"
                 )
                 .then(
-                    () => alert("✅ OTP sent successfully!"),
+                    () => {
+                        alert("✅ OTP sent successfully!")
+                        setStep("otp");
+                    },
                     (error) => {
                         console.error("EmailJS error:", error);
                         alert("❌ Failed to send OTP. Check console.");
@@ -87,9 +90,8 @@ export default function RegisterForm({ onSubmit }) {
                             required
                         />
                     </div>
-
                     <button type="submit" className="auth-btn">
-                        Register
+                        {loading ? 'Register' : 'Sending...'}
                     </button>
                 </form>
 
