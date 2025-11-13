@@ -18,7 +18,7 @@ export default function OtpForm({ email, onSubmit }) {
             if (onSubmit) onSubmit(result);
         } catch (err) {
             console.log(err)
-            setError(err.message || "OTP verification failed");
+            setError(err.message);
         } finally {
             setLoading(false);
         }

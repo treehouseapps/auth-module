@@ -1,25 +1,59 @@
 "use client";
+import emailjs from "emailjs-com";
 import { useState } from "react";
 import { loginUser } from "../lib/auth/login";
 import { registerUser } from "../lib/auth/register";
 import "../public/style.css";
+import OtpForm from "./verifyOTP";
 
 export default function AuthForm({ onSubmit }) {
+    const [step, setStep] = useState("register");
     const [mode, setMode] = useState("login");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const result =
-            mode === "login"
-                ? loginUser(email, password)
-                : registerUser(name, email, password);
 
-        if (onSubmit) onSubmit(result)
-        console.log(result)
-    };
+        if (mode === "login") {
+            const result = await loginUser(email, password);
+            if (onSubmit) onSubmit(result);
+        } else {
+            const result = await registerUser(name, email, password);
+            if (result?.success) {
+                const now = new Date();
+                const futureTime = new Date(now.getTime() + 5 * 60 * 1000);
+
+                emailjs
+                    .send(
+                        "service_hwxf2z8",
+                        "template_ih0ilv9",
+                        {
+                            email: email,
+                            passcode: result.data.data.otp,
+                            time: futureTime.toLocaleString(),
+                        },
+                        "27Rl0xvyqXbmc5Tnv"
+                    )
+                    .then(
+                        () => {
+                            alert("✅ OTP sent successfully!")
+                            setStep("otp");
+                        },
+                        (error) => {
+                            console.error("EmailJS error:", error);
+                            alert("❌ Failed to send OTP. Check console.");
+                        }
+                    );
+
+            }
+        }
+    }
+
+    if (step === "otp") {
+        return <OtpForm email={email} onSubmit={(res) => console.log(res)} />;
+    }
 
     return (
         <div className="auth-container">

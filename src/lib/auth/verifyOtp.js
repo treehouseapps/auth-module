@@ -1,5 +1,5 @@
 export async function verifyOtp(email, otp) {
-    const res = await fetch('http://localhost:4000/verify-otp', {
+    const res = await fetch('https://auth-backend-omega-six.vercel.app/verify-otp', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp }),

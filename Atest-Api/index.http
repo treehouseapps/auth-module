@@ -1,0 +1,150 @@
+# SIGNUP (Register a new Admin)
+POST https://auth-backend-omega-six.vercel.app/send-otp
+Content-Type: application/json
+
+{
+  "email": "adminTwo@example.com",
+}
+###
+# SIGNUP (Register a new user)
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+  "name": "userOne",
+  "email": "userOne@example.com",
+  "password": "123456"
+}
+###
+#Login
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "123456"
+}
+###  {
+#   "email": "userOne@example.com",
+#   "password": "123456"
+# }
+###
+# GET ALL Users
+GET http://localhost:3000/getusers/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODAyODY5OTFmMmQ2MGIwYjMyNTI5M2EiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDQ5OTk2NDIsImV4cCI6MTc0NTAwMzI0Mn0.54-LKSsCDFw1a4asyZx0jO61UVka6nOsKQWqVefHcSs
+
+###
+# Send Message
+POST http://localhost:3000/message
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODAyODY5OTFmMmQ2MGIwYjMyNTI5M2EiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDYwNDI0NjksImV4cCI6MTc0NjA0NjA2OX0.9w5_Nmrc6ilIISDRTK3gDc029k1pJwx69U7fG80HajQ
+
+{
+  "name": "Demo User one",
+  "email": "userOne@example.com",
+  "message": "Sup dude"
+}
+
+###
+# GET ALL Messages
+GET http://localhost:3000/getMessages/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODAyODY5OTFmMmQ2MGIwYjMyNTI5M2EiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDYwNDI0NjksImV4cCI6MTc0NjA0NjA2OX0.9w5_Nmrc6ilIISDRTK3gDc029k1pJwx69U7fG80HajQ
+
+###
+
+#------------------------------
+#------------------------------
+
+# ADD PRODUCT
+POST https://th-ecommerce-api.vercel.app/products/add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODA3ZWM2YzdjNTkyNWM0MWRmYzI1OTgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDU4MzA0ODMsImV4cCI6MTc0NTgzNDA4M30.scVJuUT6roHO2en4VkS8eyfXAkw329xJKWSNU3nAFWk
+
+{
+  "name": "ProductFive",
+  "description": "This is product 5",
+  "price": 500,
+  "category": "electronics"
+}
+
+###
+
+# SEARCH PRODUCT BY NAME
+POST http://localhost:3000/products/search
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VmYmM2YzZiZGJiOTg2OTYyOWM4ZTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0Mzc3MTE5OSwiZXhwIjoxNzQzNzc0Nzk5fQ.DqZ-QRo59CbQZQx3rvuVMV_Bns9mdyPclgt5zul-BLw
+
+{
+  "name": "Product 1"
+}
+
+###
+
+# GET ALL PRODUCTS
+GET http://localhost:3000/products/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VmYmM2YzZiZGJiOTg2OTYyOWM4ZTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0Mzc5NDg3NywiZXhwIjoxNzQzNzk4NDc3fQ.Q6dpwVdKrmkOmWimV1db-zgaZMAV6EpKa09GBhtj5Bc
+
+###
+
+# GET A PRODUCT BY ID
+GET http://localhost:3000/products/67eecd7516543e4b589b126a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VmYmM2YzZiZGJiOTg2OTYyOWM4ZTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0Mzc3MTE5OSwiZXhwIjoxNzQzNzc0Nzk5fQ.DqZ-QRo59CbQZQx3rvuVMV_Bns9mdyPclgt5zul-BLw
+
+###
+
+# UPDATE A PRODUCT BY ID
+PUT http://localhost:3000/products/67efc421274d09d1d5833655
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VmYmMzMzZiZGJiOTg2OTYyOWM4ZTEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDM3NzEyNDMsImV4cCI6MTc0Mzc3NDg0M30.tYH8f-NZne1LYDdb9aQ5JAn_lVMUA8liFU-t1Fm8dSQ
+
+{
+"name": "ProductFour",
+"description": "This is product 4",
+"price": "400",
+"category": "electronics"
+}
+
+###
+
+# DELETE A PRODUCT
+DELETE http://localhost:3000/products/67efdc7cee3d9aa686a55e10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VmYmMzMzZiZGJiOTg2OTYyOWM4ZTEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDM3NzEyNDMsImV4cCI6MTc0Mzc3NDg0M30.tYH8f-NZne1LYDdb9aQ5JAn_lVMUA8liFU-t1Fm8dSQ
+###
+#-----------------------------
+#-----------------------------
+
+# ADD Cart
+POST http://localhost:3000/cart/add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODAyNGY3ZTQ3ZWU0NGUzZWYzMzU1ODkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTI2MTI2MywiZXhwIjoxNzQ1MjY0ODYzfQ.uHcNwTVtaRuZZZ76zHGogNl9-aRLmpiweQ25COzNPOQ
+
+{
+  "productId" : "68067b923c3494e7d9c4584f",
+  "quantity" : 1
+}
+###
+# GET ALL Cart
+GET http://localhost:3000/cart/
+Authorization: BearereyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODAyNGY3ZTQ3ZWU0NGUzZWYzMzU1ODkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTI2MTE4NywiZXhwIjoxNzQ1MjY0Nzg3fQ.65Sb3CA47Ta71DvV_mYVH3IrmrjG6MIlEtvA7KKM2vM
+
+###
+# UPDATE A Cart BY ID
+PUT http://localhost:3000/cart/67f0053438495d90f351d504
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VmYmM2YzZiZGJiOTg2OTYyOWM4ZTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0Mzc4MzEwOSwiZXhwIjoxNzQzNzg2NzA5fQ.zkT4cylS6eqleox6XaoW8UgJa_oFbsDmsN5nFNL0jVE
+
+{
+"quantity":"2"
+}
+
+###
+# DELETE A Cart
+DELETE http://localhost:3000/cart/67f0053438495d90f351d504
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VmYmM2YzZiZGJiOTg2OTYyOWM4ZTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0Mzc4MzEwOSwiZXhwIjoxNzQzNzg2NzA5fQ.zkT4cylS6eqleox6XaoW8UgJa_oFbsDmsN5nFNL0jVE
+
+###
+
+# GET ALL Cart
+GET http://localhost:3000/cart/payment
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VmYmM2YzZiZGJiOTg2OTYyOWM4ZTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0Mzc5NDg3NywiZXhwIjoxNzQzNzk4NDc3fQ.Q6dpwVdKrmkOmWimV1db-zgaZMAV6EpKa09GBhtj5Bc
