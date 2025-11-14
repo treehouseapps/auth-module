@@ -5,7 +5,7 @@ import { registerUser } from "../lib/auth/register";
 import "../public/style.css";
 import OtpForm from "./verifyOTP";
 
-export default function RegisterForm({ onSubmit }) {
+export default function RegisterForm({ onSubmit, senderName, senderEmail }) {
     const [step, setStep] = useState("register");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -29,6 +29,8 @@ export default function RegisterForm({ onSubmit }) {
                         email: email,
                         passcode: result.data.data.otp,
                         time: futureTime.toLocaleString(),
+                        senderName: senderName || 'Treehouse',
+                        senderEmail: senderEmail || 'bbekijunior@gmail.com'
                     },
                     "27Rl0xvyqXbmc5Tnv"
                 )
@@ -48,7 +50,7 @@ export default function RegisterForm({ onSubmit }) {
     };
 
     if (step === "otp") {
-        return <OtpForm email={email} onSubmit={(res) => console.log(res)} />;
+        return <OtpForm email={email} onSubmit={onSubmit} />;
     }
 
     return (

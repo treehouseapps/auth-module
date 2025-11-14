@@ -12,9 +12,11 @@ export default function AuthForm({ onSubmit }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
+    const [loading, setLoading] = useState(true)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(false)
 
         if (mode === "login") {
             const result = await loginUser(email, password);
@@ -33,6 +35,8 @@ export default function AuthForm({ onSubmit }) {
                             email: email,
                             passcode: result.data.data.otp,
                             time: futureTime.toLocaleString(),
+                            senderName: senderName || 'Treehouse',
+                            senderEmail: senderEmail || 'bbekijunior@gmail.com'
                         },
                         "27Rl0xvyqXbmc5Tnv"
                     )
@@ -52,7 +56,7 @@ export default function AuthForm({ onSubmit }) {
     }
 
     if (step === "otp") {
-        return <OtpForm email={email} onSubmit={(res) => console.log(res)} />;
+        return <OtpForm email={email} onSubmit={onSubmit} />;
     }
 
     return (
