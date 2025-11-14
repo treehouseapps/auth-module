@@ -1,6 +1,6 @@
 "use client";
 import emailjs from "emailjs-com";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { registerUser } from "../lib/auth/register";
 import "../public/style.css";
 import OtpForm from "./verifyOTP";
@@ -9,12 +9,17 @@ export default function RegisterForm({ onSubmit, senderName, senderEmail }) {
     const [step, setStep] = useState("register");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [password, setPassword] = useState("");
+
+    useEffect(() => {
+        if (step === "register") setLoading(false);
+    }, [step]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(false)
+        setLoading(true)
         const result = await registerUser(name, email, password);
 
         if (result?.success) {
@@ -92,8 +97,8 @@ export default function RegisterForm({ onSubmit, senderName, senderEmail }) {
                             required
                         />
                     </div>
-                    <button type="submit" className="auth-btn">
-                        {loading ? 'Register' : 'Sending...'}
+                    <button type="submit" className="auth-btn" disabled={loading}>
+                        {loading ? 'Sending...' : 'Register'}
                     </button>
                 </form>
 
