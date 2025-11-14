@@ -12,11 +12,17 @@ export default function AuthForm({ onSubmit }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        if (step === "register") {
+            setLoading(false);
+        }
+    }, [step]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(false)
+        setLoading(true)
 
         if (mode === "login") {
             const result = await loginUser(email, password);
@@ -107,9 +113,10 @@ export default function AuthForm({ onSubmit }) {
                         />
                     </div>
 
-                    <button type="submit" className="auth-btn">
-                        {mode === "login" ? "Login" : "Register"}
+                    <button type="submit" className="auth-btn" disabled={mode === "register" && loading}>
+                        {mode === "login" ? "Login" : loading ? "Sending..." : "Register"}
                     </button>
+
                 </form>
 
                 <p className="auth-switch">
