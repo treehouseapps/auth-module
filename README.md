@@ -18,7 +18,7 @@ Reusable React authentication module supporting **separate forms** and a **combi
 * Callback handling for success/error
 * Returns full response: `{ success, data, error }`
 * Input validation included
-* Pure custom CSS, no Tailwind
+* Email verification with OTP after registration
 * Fully reusable
 
 ---
@@ -56,12 +56,24 @@ import { LoginForm, RegisterForm } from 'treehouse-login';
 ### 2️⃣ Combined AuthForm
 
 ```jsx
-import { AuthForm } from 'treehouse-login';
+import { LoginForm, RegisterForm } from 'treehouse-login';
 
-<AuthForm onSubmit={(res) => {
-  if(res.success) console.log("Success:", res.data);
-  else console.log("Error:", res.error);
+// Login Page
+<LoginForm onSubmit={(res) => {
+  if(res.success) console.log("Login success:", res.data);
+  else console.log("Login error:", res.error);
 }} />
+
+// Register Page
+<RegisterForm 
+  onSubmit={(res) => {
+    if(res.success) console.log("Registration success:", res.data);
+    else console.log("Registration error:", res.error);
+  }}
+  senderName="Your Name"
+  senderEmail="youremail@example.com"
+/>
+
 ```
 
 ---
@@ -70,7 +82,7 @@ import { AuthForm } from 'treehouse-login';
 
 * Module handles input and validation
 * Calls the developer callback with full response `{ success, data, error }`
-* Developer decides UI and post-processing
+* OTP is automatically sent to the user using the senderName and senderEmail you provide
 
 ---
 
@@ -93,6 +105,7 @@ yarn dev
 * Separate Forms → best for route-based apps
 * AuthForm → best for single-page/modal UX
 * Callback always receives full response for developer handling
+* OTP verification is handled automatically and included in the callback
 
 ---
 
