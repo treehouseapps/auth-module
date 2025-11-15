@@ -6,7 +6,7 @@ import { registerUser } from "../lib/auth/register";
 import "../public/style.css";
 import OtpForm from "./verifyOTP";
 
-export default function AuthForm({ onSubmit }) {
+export default function AuthForm({ onSubmit, senderName, senderEmail }) {
     const [step, setStep] = useState("register");
     const [mode, setMode] = useState("login");
     const [email, setEmail] = useState("");
