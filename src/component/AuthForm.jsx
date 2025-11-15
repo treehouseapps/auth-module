@@ -1,6 +1,6 @@
 "use client";
 import emailjs from "emailjs-com";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { loginUser } from "../lib/auth/login";
 import { registerUser } from "../lib/auth/register";
 import "../public/style.css";
