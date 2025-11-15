@@ -51,7 +51,7 @@ export default function RegisterForm({ onSubmit, senderName, senderEmail }) {
                 );
         }
         else {
-            setLoading(true)
+            setLoading(false)
         }
 
         if (onSubmit) onSubmit(result);
