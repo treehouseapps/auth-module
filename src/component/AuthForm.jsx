@@ -58,6 +58,10 @@ export default function AuthForm({ onSubmit, senderName, senderEmail }) {
                     );
 
             }
+            else {
+                setLoading(true)
+            }
+            if (onSubmit) onSubmit(result);
         }
     }
 
